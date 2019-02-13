@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "bootstrap": "^4.3.0",
     "webpack-cli": "^3.2.3"
   },
   "devDependencies": {
