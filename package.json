@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "stylus": "^0.54.5"
   },
   "devDependencies": {
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "stylus": "^0.54.5"
   }
 }
