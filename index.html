@@ -26,8 +26,38 @@
         </div>
     </nav>
 
-  <!-- Add your site or application content here -->
-  <p>It's a Homepage</p>
+    <form action="index.html" method="post">
+      <div>
+        <label for="recipe-title">TITLE:</label>
+        <input type="text" id="recipe-title" name="title">
+      </div>
+      <div>
+        <label for="ingredients">INGREDIENTS:</label>
+        <textarea id="ingredients" name="recipe_ingredients"></textarea>
+      </div>
+      <div>
+        <label for="instructions">INSTRUCTIONS (it's optionally):</label>
+        <textarea id="instructions" name="user_instructions"></textarea>
+      </div>
+      <div>
+        <label for="total-cal">TOTAL CALORIES:</label>
+        <input type="number" id="total-cal" name="tocal_calories">
+      </div>
+      <div>
+        <label for="portions-number">NUMBER OF PORTIONS:</label>
+        <input type="number" id="portions-number" name="portions_num">
+      </div>
+      <div>
+        <label for="cal-per-portion">CALORIES PER PORTION:</label>
+        <input type="number" id="cal-per-portion" name="cal_pp">
+      </div>
+      <input type="submit" value="Save">
+      
+    </form>
+    
+
+    
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
   <script src="dist/bundle.js"></script>
