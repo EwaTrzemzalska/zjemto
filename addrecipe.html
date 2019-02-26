@@ -17,24 +17,26 @@
 </head>
 
 <body>
-    <nav class="uk-navbar-container" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li><a href="index.html">Home</a></li>
-                <li class="uk-active"><a href="addrecipe.html">Add recipe</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="uk-margin">
-        <form class="uk-search uk-search-default">
-            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-            <input class="uk-search-input" type="search" placeholder="Search...">
-        </form>
+  <nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="uk-active"><a href="addrecipe.html">Add recipe</a></li>
+      </ul>
     </div>
+  </nav>
+
+  
+  <div class="uk-margin">
+    <form class="uk-search uk-search-default">
+      <label for="searching" class="size-10">WHAT ARE YOU LOOKING FOR?</label>
+      <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+      <input class="uk-search-input" type="search" name="searching" placeholder="Search...">
+    </form>
+  </div>
+
 
   <!-- Add your site or application content here -->
-  <p>It's Adding Recipe Page!</p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
   <script src="dist/bundle.js"></script>
