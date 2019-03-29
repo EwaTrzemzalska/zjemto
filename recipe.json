@@ -1,0 +1,14 @@
+{
+  "title": "your food's name",
+  "ingredients": [
+    "ingredient1",
+    "ingredient2",
+    "ingredient3"
+  ],
+  "instructions": [
+    "your instruction goes here"
+  ],
+  "total calories": "your number of total calories goes here",
+  "number of portions": "your number of portions goes here",
+  "calories per portion": "your calories will be calculated here"
+}
