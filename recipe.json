@@ -5,10 +5,8 @@
     "ingredient2",
     "ingredient3"
   ],
-  "instructions": [
-    "your instruction goes here"
-  ],
-  "total calories": "your number of total calories goes here",
-  "number of portions": "your number of portions goes here",
-  "calories per portion": "your calories will be calculated here"
+  "instructions": "your instruction goes here",
+  "total_calories": "your number of total calories goes here",
+  "number_of_portions": "your number of portions goes here",
+  "calories_per_portion": "your calories will be calculated here"
 }
