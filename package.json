@@ -1,9 +1,12 @@
 {
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "jest": "^24.5.0",
+    "stylus": "^0.54.5",
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3",
-    "stylus": "^0.54.5"
+    "webpack-cli": "^3.2.3"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
