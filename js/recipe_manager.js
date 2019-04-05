@@ -23,7 +23,7 @@ let window.db = {
     "number_of_portions": 2,
     "calories_per_portion": 400
   }
-  ],
+  ]
 }
 
 
@@ -54,7 +54,6 @@ const createRecipe = function(recipe) {
  
   // TODO: calculate calories per portion;
   // TODO: generate new ID;
- 
 
   return ID;
 };
@@ -76,7 +75,6 @@ const deleteRecipe = function(id) {
 
   // TODO: delete recipe 
 }
-
 
 
 
