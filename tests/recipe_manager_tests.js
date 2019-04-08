@@ -33,7 +33,7 @@ test('getRecipe returns recipe by id ', () => {
   expect(getRecipe(4)).toEqual({
     id: 4,
     title: "Pasta alla Genovese"
-  }));
+  });
 });
 
 test('getRecipe didn\' t returns recipe by not existing id ', () => {
@@ -43,10 +43,45 @@ test('getRecipe didn\' t returns recipe by not existing id ', () => {
 
 test('createRecipe returns new recipe\'s id', () => {
   window.db = database;
-  expect(createRecipe({title: "Soup"}).toBe())
+  const newId = createRecipe({title: "Soup"});
+  expect(getRecipe(newId)).toBe({
+    id: newId,
+    title: "Soup"
+  })
   // if ID is new
   // if any ID is returned
   // if function returns error when you use not existing key
   // if calculates calories_per_portion
   // 
+});
+
+test('updateRecipe prevents updating recipe\'s id', () => {
+ window.db = database;
+ expect(updateRecipe(4, id, 6)).toBe(error);
+});
+
+test('updateRecipe prevents updating calories_per_portion', () => {
+  window.db = {
+    recipes: [{
+      id: 4,
+      title: "Pasta alla Genovese",
+      calories_per_portion: 568
+    },
+    {
+      id: 8,
+      title: "Pizza",
+      calories_per_portion: 644
+    }]
+  };
+  expect(updateRecipe(4, calories_per_portion, 888)).toBe(error);
+});
+
+test('updateRecipe returns error when id doesn\'t exist', () => {
+  window.db = database;
+  expect(updateRecipe(12, title, 'Sausage')).toBe(error)
+});
+
+test('updateRecipe returns error when key doesn\'t exist', () => {
+  window.db = database;
+  expect(updateRecipe(4, animal, 'dog')).toBe(error)
 });
