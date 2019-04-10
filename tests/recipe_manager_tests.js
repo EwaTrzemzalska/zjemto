@@ -1,4 +1,13 @@
-const sum = require('../js/recipe_manager');
+const {
+  getRecipes,
+  getRecipe, 
+  createRecipe, 
+  updateRecipe,
+  deleteRecipe
+} = require('../js/recipe_manager');
+
+
+
 
 test('adds 1 + 2 to equal 3', () => {
   expect(sum(1, 2)).toBe(3);

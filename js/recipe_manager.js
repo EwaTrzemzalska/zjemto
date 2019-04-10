@@ -80,5 +80,9 @@ const deleteRecipe = function(id) {
 
 
 module.exports = {
-  getRecipes: getRecipes
+  getRecipes: getRecipes,
+  getRecipe: getRecipe,
+  createRecipe: createRecipe,
+  updateRecipe: updateRecipe,
+  deleteRecipe: deleteRecipe
 }
