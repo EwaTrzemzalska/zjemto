@@ -1,4 +1,4 @@
-let window.db = {
+window.db = {
   recipes: [{
     "id": 1,
     "title": "Spaghetti Carbonara",
