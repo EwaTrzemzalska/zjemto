@@ -11,7 +11,7 @@ window.db = {
     "number_of_portions": 4,
     "calories_per_portion": 650
   },
-  { 
+  {
     "id": 2,
     "title": "Toast",
     "ingredients": [
@@ -29,29 +29,63 @@ window.db = {
 
 // ----------------- API -------------------
 
-const validateRecipeKey = function(key, newValue) {
+const validateTypeofKey = function (key, newValue, type) {
+  if (typeof newValue !== type) {
+    throw new Error(`${key} has to be ${type}`);
+  }
+}
+
+const validateRecipeKey = function (key, newValue) {
+  switch (key) {
+    case "title":
+    case "instructions":
+      validateTypeofKey(key, newValue, "string");
+      break;
+    case "total_calories":
+    case "number_of_portions":
+    case "id":
+      validateTypeofKey(key, newValue, "number");
+      break;
+    case "ingredients":
+      if (!(Array.isArray(newValue))) {
+        throw new Error("ingredients has to be Array");
+      }
+      if (!(newValue.every((el) => typeof el === "string"))) {
+        throw new Error("every ingredient has to be string")
+      }
+      break;
+    default:
+      return false;
+  }
+  return true;
   // total_calories must be a number
   // number_of_portions must be a number
 };
 
-const validateRecipe = function(recipe) {
+const validateRecipe = function (recipe) {
   // loop over pairs: key-value, call the function validateRecipeKey() with key, value
 };
 
 // CRUD
 
 /** Returns all recipes in the database */
-const getRecipes = function() {};
+const getRecipes = function () {
+  return window.db.recipes;
+};
 
 /** Returns recipe with the given id */
-const getRecipe = function(id) {};
+const getRecipe = function (id) {
+  return window.db.recipes.find(function (el) {
+    return el.id === id;
+  });
+};
 
 /** Adds new recipe to the database. Returns the new recipe's ID */
-const createRecipe = function(recipe) {
+const createRecipe = function (recipe) {
   validateRecipe(recipe);
   const numOfPort = recipe.number_of_portions;
   const totalCal = recipe.total_calories;
- 
+
   // TODO: calculate calories per portion;
   // TODO: generate new ID;
 
@@ -59,8 +93,8 @@ const createRecipe = function(recipe) {
 };
 
 /** Updates recipe in the database.  */
-const updateRecipe = function(id, key, newValue) {
-  validateRecipeKey(key, newValue) 
+const updateRecipe = function (id, key, newValue) {
+  validateRecipeKey(key, newValue)
 
   // TODO: prevent update of calories_per_portion
   // TODO: prevent update of ID
@@ -71,7 +105,7 @@ const updateRecipe = function(id, key, newValue) {
 
 /** */
 
-const deleteRecipe = function(id) {
+const deleteRecipe = function (id) {
 
   // TODO: delete recipe 
 }
@@ -84,5 +118,7 @@ module.exports = {
   getRecipe: getRecipe,
   createRecipe: createRecipe,
   updateRecipe: updateRecipe,
-  deleteRecipe: deleteRecipe
+  deleteRecipe: deleteRecipe,
+  validateRecipe: validateRecipe,
+  validateRecipeKey: validateRecipeKey
 }
