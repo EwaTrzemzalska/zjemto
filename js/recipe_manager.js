@@ -58,12 +58,14 @@ const validateRecipeKey = function (key, newValue) {
       return false;
   }
   return true;
-  // total_calories must be a number
-  // number_of_portions must be a number
 };
 
 const validateRecipe = function (recipe) {
-  // loop over pairs: key-value, call the function validateRecipeKey() with key, value
+  for (const key in recipe) {
+    if(recipe.hasOwnProperty(key)) {
+      return validateRecipeKey(key, recipe[key]);
+    }
+  }
 };
 
 // CRUD
