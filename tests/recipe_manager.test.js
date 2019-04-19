@@ -8,7 +8,6 @@ const {
   validateRecipe
 } = require('../js/recipe_manager');
 
-
 let database = {
   recipes: [{
     id: 4,
@@ -149,4 +148,30 @@ test("validateRecipeKey properly validates if every ingredient is a string", () 
   expect(() => validateRecipeKey("ingredients", [{}, "cream"])).toThrow("every ingredient has to be string");
   expect(() => validateRecipeKey("ingredients", [["Mushroom"], ["cream"]])).toThrow("every ingredient has to be string");
   expect(validateRecipeKey("ingredients", ["Mushroom", "cream"])).toBe(true);
+});
+
+
+test("validateRecipeKey returns false when key doesn't exist", () => {
+  expect(validateRecipeKey("animal", "doggo")).toBe(false);
+});
+
+
+test("validateRecipe returns true for valid recipe", () => {
+  expect(validateRecipe({
+    id: 4,
+    title: "Pasta alla Genovese",
+    calories_per_portion: 568
+  })).toBe(true)
+});
+
+test("validateRecipe returns false for empty recipe", () => {
+  expect(validateRecipe({})).toBe(false)
+});
+
+test("validateRecipe returns false for invalid recipe", () => {
+  expect(validateRecipe({
+    id: 10,
+    title: "Tomato Soup",
+    animal: "frog"
+  })).toBe(false)
 });

@@ -42,6 +42,7 @@ const validateRecipeKey = function (key, newValue) {
       validateTypeofKey(key, newValue, "string");
       break;
     case "total_calories":
+    case "calories_per_portion":
     case "number_of_portions":
     case "id":
       validateTypeofKey(key, newValue, "number");
@@ -61,11 +62,14 @@ const validateRecipeKey = function (key, newValue) {
 };
 
 const validateRecipe = function (recipe) {
+  let result = false;
   for (const key in recipe) {
-    if(recipe.hasOwnProperty(key)) {
-      return validateRecipeKey(key, recipe[key]);
+    result = true;
+    if (recipe.hasOwnProperty(key) && !(validateRecipeKey(key, recipe[key]))) {
+      return false;
     }
   }
+  return result;
 };
 
 // CRUD
