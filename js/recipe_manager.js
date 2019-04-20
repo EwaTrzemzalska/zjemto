@@ -1,3 +1,8 @@
+const {
+  validateRecipeKey: validateRecipeKey,
+  validateRecipe: validateRecipe
+} = require('../js/validation')
+
 window.db = {
   recipes: [{
     "id": 1,
@@ -29,48 +34,6 @@ window.db = {
 
 // ----------------- API -------------------
 
-const validateTypeofKey = function (key, newValue, type) {
-  if (typeof newValue !== type) {
-    throw new Error(`${key} has to be ${type}`);
-  }
-}
-
-const validateRecipeKey = function (key, newValue) {
-  switch (key) {
-    case "title":
-    case "instructions":
-      validateTypeofKey(key, newValue, "string");
-      break;
-    case "total_calories":
-    case "calories_per_portion":
-    case "number_of_portions":
-    case "id":
-      validateTypeofKey(key, newValue, "number");
-      break;
-    case "ingredients":
-      if (!(Array.isArray(newValue))) {
-        throw new Error("ingredients has to be Array");
-      }
-      if (!(newValue.every((el) => typeof el === "string"))) {
-        throw new Error("every ingredient has to be string")
-      }
-      break;
-    default:
-      return false;
-  }
-  return true;
-};
-
-const validateRecipe = function (recipe) {
-  let result = false;
-  for (const key in recipe) {
-    result = true;
-    if (recipe.hasOwnProperty(key) && !(validateRecipeKey(key, recipe[key]))) {
-      return false;
-    }
-  }
-  return result;
-};
 
 // CRUD
 
@@ -124,7 +87,5 @@ module.exports = {
   getRecipe: getRecipe,
   createRecipe: createRecipe,
   updateRecipe: updateRecipe,
-  deleteRecipe: deleteRecipe,
-  validateRecipe: validateRecipe,
-  validateRecipeKey: validateRecipeKey
+  deleteRecipe: deleteRecipe
 }
