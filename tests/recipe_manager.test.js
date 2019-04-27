@@ -67,12 +67,20 @@ test("createRecipe returns new recipe's id", () => {
     number_of_portions: 4,
     calories_per_portion: 150
   })
-  // if function returns error when you use not existing key
-  // if calculates calories_per_portion
-  // TODO returns error when not enough keys
-  // TODO check if user is not sending calories_per_portion
-  // TODO check if user is not sending id
 
+  // TODO returns error when not enough keys
+
+
+});
+
+test("createRecipe returns false when used key not exist", () => {
+ expect(createRecipe({
+  title: "Soup",
+  animal: ["Tomato", "Cream"],
+  instructions: "Cook",
+  total_calories: 600,
+  number_of_portions: 4
+ })).toBe(false);
 });
 
 

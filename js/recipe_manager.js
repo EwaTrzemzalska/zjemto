@@ -54,10 +54,13 @@ const getRecipe = function (id) {
 
 /** Adds new recipe to the database. Returns the new recipe's ID */
 const createRecipe = function (recipe) {
-  validateRecipe(recipe);
+  if (!validateRecipe(recipe)) {
+    return false;
+  };
+
   const numOfPort = recipe.number_of_portions;
   const totalCal = recipe.total_calories;
-  recipe.calories_per_portion = totalCal / numOfPort;
+  const caloriesPerPortion = totalCal / numOfPort;
   const newId = uuidv1();
   const myRecipe =  {
     id: newId,
@@ -66,14 +69,11 @@ const createRecipe = function (recipe) {
     instructions: recipe.instructions,
     total_calories: recipe.total_calories,
     number_of_portions: recipe.number_of_portions,
-    calories_per_portion: recipe.calories_per_portion
+    calories_per_portion: caloriesPerPortion
   };
   window.db.recipes.push(myRecipe);
 
   return newId;
-  // TODO: calculate calories per portion;
-  // TODO: generate new ID;
-
 };
 
 /** Updates recipe in the database.  */
