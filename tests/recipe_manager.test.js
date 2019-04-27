@@ -1,7 +1,7 @@
 const {
   getRecipes,
-  getRecipe, 
-  createRecipe, 
+  getRecipe,
+  createRecipe,
   updateRecipe,
   deleteRecipe
 } = require('../js/recipe_manager');
@@ -51,22 +51,39 @@ test("getRecipe didn't returns recipe by not existing id", () => {
 
 test("createRecipe returns new recipe's id", () => {
   window.db = database;
-  const newId = createRecipe({title: "Soup", calories_per_portion: 244});
-  expect(getRecipe(newId)).toBe({
+  const newId = createRecipe({
+    title: "Soup",
+    ingredients: ["Tomato", "Cream"],
+    instructions: "Cook",
+    total_calories: 600,
+    number_of_portions: 4
+  });
+  expect(getRecipe(newId)).toEqual({
     id: newId,
     title: "Soup",
-    calories_per_portion: 244
+    ingredients: ["Tomato", "Cream"],
+    instructions: "Cook",
+    total_calories: 600,
+    number_of_portions: 4,
+    calories_per_portion: 150
   })
-  // if ID is new
-  // if any ID is returned
   // if function returns error when you use not existing key
   // if calculates calories_per_portion
-  // 
+  // TODO returns error when not enough keys
+  // TODO check if user is not sending calories_per_portion
+  // TODO check if user is not sending id
+
 });
 
+
+
+
+
+
+
 test("updateRecipe prevents updating recipe's id", () => {
- window.db = database;
- expect(updateRecipe(4, "id", 6)).toThrow("You can't update id!");
+  window.db = database;
+  expect(updateRecipe(4, "id", 6)).toThrow("You can't update id!");
 });
 
 test("updateRecipe prevents updating calories_per_portion", () => {

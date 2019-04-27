@@ -3,6 +3,9 @@ const {
   validateRecipe: validateRecipe
 } = require('../js/validation')
 
+const uuidv1 = require('uuid/v1');
+
+
 window.db = {
   recipes: [{
     "id": 1,
@@ -54,11 +57,23 @@ const createRecipe = function (recipe) {
   validateRecipe(recipe);
   const numOfPort = recipe.number_of_portions;
   const totalCal = recipe.total_calories;
+  recipe.calories_per_portion = totalCal / numOfPort;
+  const newId = uuidv1();
+  const myRecipe =  {
+    id: newId,
+    title: recipe.title,
+    ingredients: recipe.ingredients,
+    instructions: recipe.instructions,
+    total_calories: recipe.total_calories,
+    number_of_portions: recipe.number_of_portions,
+    calories_per_portion: recipe.calories_per_portion
+  };
+  window.db.recipes.push(myRecipe);
 
+  return newId;
   // TODO: calculate calories per portion;
   // TODO: generate new ID;
 
-  return ID;
 };
 
 /** Updates recipe in the database.  */
