@@ -78,7 +78,20 @@ const createRecipe = function (recipe) {
 
 /** Updates recipe in the database.  */
 const updateRecipe = function (id, key, newValue) {
-  validateRecipeKey(key, newValue)
+  console.log("id:::", id);
+  if (!validateRecipeKey(key, newValue)) {
+    return false
+  }; 
+  const recipeIndex = window.db.recipes.findIndex(obj => {
+    if(obj.id == 4)
+      console.log("Co nie dziala", obj, id);
+    return obj.id === id
+  });
+  console.log("My recipe index" + recipeIndex);
+  window.db.recipes[recipeIndex][key] = newValue;
+
+
+  
 
   // TODO: prevent update of calories_per_portion
   // TODO: prevent update of ID
