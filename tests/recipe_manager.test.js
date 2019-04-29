@@ -6,26 +6,12 @@ const {
   deleteRecipe
 } = require('../js/recipe_manager');
 
-
-let database = {
-  recipes: [{
-    id: 4,
-    title: "Pasta alla Genovese",
-    calories_per_portion: 568
-  },
-  {
-    id: 8,
-    title: "Pizza",
-    calories_per_portion: 644
-  }]
-};
-
-const resetDatabase = function () {
-  window.db = {...database};
-};
+const {
+  setDefaultDatabase
+} = require('./helpers.js');
 
 test("getRecipes returns recipes", () => {
-  window.db = database;
+  setDefaultDatabase();
   expect(getRecipes()).toEqual([{
     id: 4,
     title: "Pasta alla Genovese",
@@ -39,7 +25,7 @@ test("getRecipes returns recipes", () => {
 });
 
 test("getRecipe returns recipe by id", () => {
-  window.db = database;
+  setDefaultDatabase();
   expect(getRecipe(4)).toEqual({
     id: 4,
     title: "Pasta alla Genovese",
@@ -48,12 +34,12 @@ test("getRecipe returns recipe by id", () => {
 });
 
 test("getRecipe didn't returns recipe by not existing id", () => {
-  window.db = database;
+  setDefaultDatabase();
   expect(getRecipe(10)).toBe(undefined);
 });
 
 test("createRecipe returns new recipe's id", () => {
-  window.db = database;
+  setDefaultDatabase();
   const newId = createRecipe({
     title: "Soup",
     ingredients: ["Tomato", "Cream"],
@@ -77,39 +63,38 @@ test("createRecipe returns new recipe's id", () => {
 });
 
 test("createRecipe returns false when used key not exist", () => {
- expect(createRecipe({
-  title: "Soup",
-  animal: ["Tomato", "Cream"],
-  instructions: "Cook",
-  total_calories: 600,
-  number_of_portions: 4
- })).toBe(false);
+  expect(createRecipe({
+    title: "Soup",
+    animal: ["Tomato", "Cream"],
+    instructions: "Cook",
+    total_calories: 600,
+    number_of_portions: 4
+  })).toBe(false);
 });
 
 test("updateRecipe prevents updating recipe's id (boolean)", () => {
-  window.db = database;
-  expect(updateRecipe(4, "id", 6)).toBe(false);
+  setDefaultDatabase();
+  updateRecipe(4, "id", 6);
 });
 
-// test("updateRecipe prevents updating calories_per_portion (boolean)", () => {
-//   window.db = database;
-//   expect(updateRecipe(4, "calories_per_portion", 888)).toBe(false)
-// });
+test("updateRecipe prevents updating calories_per_portion (boolean)", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(4, "calories_per_portion", 888)).toBe(false)
+});
 
 
-// test("updateRecipe returns error when id doesn't exist (boolean)", () => {
-//   window.db = database;
-//   expect(updateRecipe(12, "title", 'Sausage')).toBe(false);
-// });
+test("updateRecipe returns error when id doesn't exist (boolean)", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(12, "title", 'Sausage')).toBe(false);
+});
 
-// test("updateRecipe returns error when key doesn't exist (boolean)", () => {
-//   window.db = database;
-//   expect(updateRecipe(4, "animal", 'dog')).toBe(false);
-// });
+test("updateRecipe returns error when key doesn't exist (boolean)", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(4, "animal", 'dog')).toBe(false);
+});
 
 test("updateRecipe returns update recipe", () => {
-  console.log(window.db);
-  window.db = database;
+  setDefaultDatabase();
   updateRecipe(4, "title", "My new Pasta");
   expect(getRecipe(4)).toEqual({
     id: 4,
@@ -122,22 +107,22 @@ test("updateRecipe returns update recipe", () => {
 
 
 
-// test("updateRecipe prevents updating recipe's id", () => {
-//   window.db = database;
-//   expect(updateRecipe(4, "id", 6)).toThrow("You can't update id!");
-// });
+test("updateRecipe prevents updating recipe's id", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(4, "id", 6)).toThrow("You can't update id!");
+});
 
-// test("updateRecipe prevents updating calories_per_portion", () => {
-//   window.db = database;
-//   expect(updateRecipe(4, "calories_per_portion", 888)).toThrow("You can't update calories_per_portion ")
-// });
+test("updateRecipe prevents updating calories_per_portion", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(4, "calories_per_portion", 888)).toThrow("You can't update calories_per_portion ")
+});
 
-// test("updateRecipe returns error when id doesn't exist", () => {
-//   window.db = database;
-//   expect(updateRecipe(12, "title", 'Sausage')).toThrow("Your id doesn't exist")
-// });
+test("updateRecipe returns error when id doesn't exist", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(12, "title", 'Sausage')).toThrow("Your id doesn't exist")
+});
 
-// test("updateRecipe returns error when key doesn't exist", () => {
-//   window.db = database;
-//   expect(updateRecipe(4, "animal", 'dog')).toThrow("Your key doesn't exist")
-// });
+test("updateRecipe returns error when key doesn't exist", () => {
+  setDefaultDatabase();
+  expect(updateRecipe(4, "animal", 'dog')).toThrow("Your key doesn't exist")
+});
