@@ -1,6 +1,7 @@
 const {
   validateRecipeKey: validateRecipeKey,
-  validateRecipe: validateRecipe
+  validateRecipe: validateRecipe,
+  isValidKey: isValidKey
 } = require('../js/validation')
 
 const uuidv1 = require('uuid/v1');
@@ -62,7 +63,7 @@ const createRecipe = function (recipe) {
   const totalCal = recipe.total_calories;
   const caloriesPerPortion = totalCal / numOfPort;
   const newId = uuidv1();
-  const myRecipe =  {
+  const myRecipe = {
     id: newId,
     title: recipe.title,
     ingredients: recipe.ingredients,
@@ -76,12 +77,11 @@ const createRecipe = function (recipe) {
   return newId;
 };
 
+
 /** Updates recipe in the database.  */
 const updateRecipe = function (id, key, newValue) {
   if (!validateRecipeKey(key, newValue)) {
-    const allKeys = Object.keys(window.db.recipes[0]);
-    const doesKeyExist = allKeys.includes(key);
-    if (!doesKeyExist) {
+    if (!isValidKey(key)) {
       throw new Error("Your key doesn't exist")
     } else {
       return false;
@@ -91,44 +91,25 @@ const updateRecipe = function (id, key, newValue) {
 
   // czy `id` istnieje 
 
- const doesIdExist = window.db.recipes.find(function(el) {
+  const doesIdExist = window.db.recipes.find(function (el) {
     return el.id === id;
   });
 
-if (!doesIdExist) {
-  throw new Error("Your id doesn't exist");
-}
+  if (!doesIdExist) {
+    throw new Error("Your id doesn't exist");
+  }
 
-// 1. const allKeys = Object.keys(window.db.recipes[0]);
-
-// const doesKeyExist = allKeys.includes(key);
-
-// if(!doesKeyExist) {
-//   throw new Error("Your key doesn't exist");
-// }
-// 2. const doesKeyExist = window.db.recipes[0].hasOwnProperty(key);
-
-// if(!doesKeyExist) {
-//   throw new Error("Your key doesn't exist");
-// }
-
-
-  switch(key) {
+  switch (key) {
     case "id":
       throw new Error("You can't update id!");
     case "calories_per_portion":
       throw new Error("You can't update calories_per_portion!");
   }
 
-
-  
   const recipeIndex = window.db.recipes.findIndex(obj => {
     return obj.id === id
   });
   window.db.recipes[recipeIndex][key] = newValue;
-
-  // TODO: throw an error if ID doesn't exist
-  // TODO: throw an error if key doesn't exist in recipe
 
 }
 

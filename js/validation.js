@@ -5,6 +5,11 @@ const validateTypeofKey = function (key, newValue, type) {
   }
 }
 
+const allKeys = ["id", "title", "ingredients", "instructions", "total_calories", "number_of_portions", "calories_per_portion"];
+const isValidKey = function (key) {
+  return allKeys.includes(key);
+};
+
 /** Returns true for a valid recipe key-value pair, throws exception otherwise */
 const validateRecipeKey = function (key, newValue) {
   switch (key) {
@@ -46,5 +51,6 @@ const validateRecipe = function (recipe) {
 
 module.exports = {
   validateRecipeKey: validateRecipeKey,
-  validateRecipe: validateRecipe
+  validateRecipe: validateRecipe,
+  isValidKey: isValidKey
 }
