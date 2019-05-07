@@ -6,33 +6,33 @@ const {
 const uuidv1 = require('uuid/v1');
 
 
-// window.db = {
-//   recipes: [{
-//     "id": 1,
-//     "title": "Spaghetti Carbonara",
-//     "ingredients": [
-//       "200g pancetta or thick cut bacon, diced",
-//       "4 yolks",
-//     ],
-//     "instructions": "1 Heat pasta water. Prepare rest of ingredients. Voila.",
-//     "total_calories": 2600,
-//     "number_of_portions": 4,
-//     "calories_per_portion": 650
-//   },
-//   {
-//     "id": 2,
-//     "title": "Toast",
-//     "ingredients": [
-//       "bread",
-//       "cheese"
-//     ],
-//     "instructions": "Put cheese beetwen bread slices. Put in the toaster. Voila",
-//     "total_calories": 800,
-//     "number_of_portions": 2,
-//     "calories_per_portion": 400
-//   }
-//   ]
-// };
+window.db = {
+  recipes: [{
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "ingredients": [
+      "200g pancetta or thick cut bacon, diced",
+      "4 yolks",
+    ],
+    "instructions": "1 Heat pasta water. Prepare rest of ingredients. Voila.",
+    "total_calories": 2600,
+    "number_of_portions": 4,
+    "calories_per_portion": 650
+  },
+  {
+    "id": 2,
+    "title": "Toast",
+    "ingredients": [
+      "bread",
+      "cheese"
+    ],
+    "instructions": "Put cheese beetwen bread slices. Put in the toaster. Voila",
+    "total_calories": 800,
+    "number_of_portions": 2,
+    "calories_per_portion": 400
+  }
+  ]
+};
 
 
 // ----------------- API -------------------
@@ -79,18 +79,54 @@ const createRecipe = function (recipe) {
 /** Updates recipe in the database.  */
 const updateRecipe = function (id, key, newValue) {
   if (!validateRecipeKey(key, newValue)) {
-    return false
-  }; 
+    const allKeys = Object.keys(window.db.recipes[0]);
+    const doesKeyExist = allKeys.includes(key);
+    if (!doesKeyExist) {
+      throw new Error("Your key doesn't exist")
+    } else {
+      return false;
+    }
+  };
+
+
+  // czy `id` istnieje 
+
+ const doesIdExist = window.db.recipes.find(function(el) {
+    return el.id === id;
+  });
+
+if (!doesIdExist) {
+  throw new Error("Your id doesn't exist");
+}
+
+// 1. const allKeys = Object.keys(window.db.recipes[0]);
+
+// const doesKeyExist = allKeys.includes(key);
+
+// if(!doesKeyExist) {
+//   throw new Error("Your key doesn't exist");
+// }
+// 2. const doesKeyExist = window.db.recipes[0].hasOwnProperty(key);
+
+// if(!doesKeyExist) {
+//   throw new Error("Your key doesn't exist");
+// }
+
+
+  switch(key) {
+    case "id":
+      throw new Error("You can't update id!");
+    case "calories_per_portion":
+      throw new Error("You can't update calories_per_portion!");
+  }
+
+
+  
   const recipeIndex = window.db.recipes.findIndex(obj => {
     return obj.id === id
   });
   window.db.recipes[recipeIndex][key] = newValue;
 
-
-  
-
-  // TODO: prevent update of calories_per_portion
-  // TODO: prevent update of ID
   // TODO: throw an error if ID doesn't exist
   // TODO: throw an error if key doesn't exist in recipe
 
