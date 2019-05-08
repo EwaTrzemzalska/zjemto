@@ -119,3 +119,9 @@ test("updateRecipe returns error when key doesn't exist", () => {
   setDefaultDatabase()
   expect(() => updateRecipe(4, 'animal', 'dog')).toThrow("Your key doesn't exist")
 })
+
+test('deleteRecipe deletes recipe from database', () => {
+  setDefaultDatabase()
+  deleteRecipe(4)
+  expect(getRecipe(4)).toBe(undefined)
+})

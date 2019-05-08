@@ -84,8 +84,6 @@ const updateRecipe = function (id, key, newValue) {
     }
   };
 
-  // czy `id` istnieje
-
   const doesIdExist = window.db.recipes.find(function (el) {
     return el.id === id
   })
@@ -110,7 +108,10 @@ const updateRecipe = function (id, key, newValue) {
 /** */
 
 const deleteRecipe = function (id) {
-
+  const recipeIndex = window.db.recipes.findIndex(obj => {
+    return obj.id === id
+  })
+  window.db.recipes.splice(recipeIndex, 1)
   // TODO: delete recipe
 }
 
