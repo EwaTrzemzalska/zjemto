@@ -46,9 +46,9 @@ const getRecipes = function () {
 /** Returns recipe with the given id */
 const getRecipe = function (id) {
   return window.db.recipes.find(function (el) {
-    return el.id === id;
-  });
-};
+    return el.id === id
+  })
+}
 
 /** Adds new recipe to the database. Returns the new recipe's ID */
 const createRecipe = function (recipe) {
