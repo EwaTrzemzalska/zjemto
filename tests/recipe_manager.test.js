@@ -70,26 +70,6 @@ test('createRecipe returns false when used key not exist', () => {
   })).toBe(false)
 })
 
-// test("updateRecipe prevents updating recipe's id (boolean)", () => {
-//   setDefaultDatabase();
-//   updateRecipe(4, "id", 6).toBe(false);
-// });
-
-// test("updateRecipe prevents updating calories_per_portion (boolean)", () => {
-//   setDefaultDatabase();
-//   expect(updateRecipe(4, "calories_per_portion", 888)).toBe(false)
-// });
-
-// test("updateRecipe returns error when id doesn't exist (boolean)", () => {
-//   setDefaultDatabase();
-//   expect(updateRecipe(12, "title", 'Sausage')).toBe(false);
-// });
-
-// test("updateRecipe returns error when key doesn't exist (boolean)", () => {
-//   setDefaultDatabase();
-//   expect(updateRecipe(4, "animal", 'dog')).toBe(false);
-// });
-
 test('updateRecipe returns update recipe', () => {
   setDefaultDatabase()
   updateRecipe(4, 'title', 'My new Pasta')

@@ -105,14 +105,13 @@ const updateRecipe = function (id, key, newValue) {
   window.db.recipes[recipeIndex][key] = newValue
 }
 
-/** */
+/** Deletes recipe from database. */
 
 const deleteRecipe = function (id) {
   const recipeIndex = window.db.recipes.findIndex(obj => {
     return obj.id === id
   })
   window.db.recipes.splice(recipeIndex, 1)
-  // TODO: delete recipe
 }
 
 module.exports = {
