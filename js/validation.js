@@ -1,7 +1,7 @@
 
 const validateTypeofKey = function (key, newValue, type) {
   if (typeof newValue !== type) {
-    throw new Error(`${key} has to be ${type}`)
+    throw new Error(`${key} has to be a ${type}`)
   }
 }
 
