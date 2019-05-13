@@ -1,7 +1,13 @@
 
+<<<<<<< HEAD
 const validateTypeOfKey = function (key, value, type) {
   if (typeof value !== type) {
     throw new Error(`${key} has to be ${type}`)
+=======
+const validateTypeofKey = function (key, newValue, type) {
+  if (typeof newValue !== type) {
+    throw new Error(`${key} has to be a ${type}`)
+>>>>>>> bb9d77ba7fb10a5e3c1d6e09c4149947e5d399c8
   }
 }
 
