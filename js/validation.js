@@ -1,33 +1,33 @@
 
-const validateTypeofKey = function (key, newValue, type) {
-  if (typeof newValue !== type) {
+const validateTypeOfKey = function (key, value, type) {
+  if (typeof value !== type) {
     throw new Error(`${key} has to be ${type}`)
   }
 }
 
-const allKeys = ['id', 'title', 'ingredients', 'instructions', 'total_calories', 'number_of_portions', 'calories_per_portion']
+const allKeys = ['id', 'title', 'ingredients', 'instructions', 'totalCalories', 'numberOfPortions', 'caloriesPerPortion']
 const isValidKey = function (key) {
   return allKeys.includes(key)
 }
 
 /** Returns true for a valid recipe key-value pair, throws exception otherwise */
-const validateRecipeKey = function (key, newValue) {
+const validateRecipeKey = function (key, value) {
   switch (key) {
     case 'title':
     case 'instructions':
-      validateTypeofKey(key, newValue, 'string')
+      validateTypeOfKey(key, value, 'string')
       break
-    case 'total_calories':
-    case 'calories_per_portion':
-    case 'number_of_portions':
+    case 'totalCalories':
+    case 'caloriesPerPortion':
+    case 'numberOfPortions':
     case 'id':
-      validateTypeofKey(key, newValue, 'number')
+      validateTypeOfKey(key, value, 'number')
       break
     case 'ingredients':
-      if (!(Array.isArray(newValue))) {
+      if (!(Array.isArray(value))) {
         throw new Error('ingredients has to be Array')
       }
-      if (!(newValue.every((el) => typeof el === 'string'))) {
+      if (!value.every((el) => typeof el === 'string')) {
         throw new Error('every ingredient has to be string')
       }
       break

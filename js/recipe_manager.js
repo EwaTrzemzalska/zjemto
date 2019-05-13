@@ -1,10 +1,10 @@
+const uuidv1 = require('uuid/v1')
+
 const {
   validateRecipeKey,
   validateRecipe,
   isValidKey
 } = require('../js/validation')
-
-const uuidv1 = require('uuid/v1')
 
 window.db = {
   recipes: [{
@@ -15,9 +15,9 @@ window.db = {
       '4 yolks'
     ],
     'instructions': '1 Heat pasta water. Prepare rest of ingredients. Voila.',
-    'total_calories': 2600,
-    'number_of_portions': 4,
-    'calories_per_portion': 650
+    'totalCalories': 2600,
+    'numberOfPortions': 4,
+    'caloriesPerPortion': 650
   },
   {
     'id': 2,
@@ -27,9 +27,9 @@ window.db = {
       'cheese'
     ],
     'instructions': 'Put cheese beetwen bread slices. Put in the toaster. Voila',
-    'total_calories': 800,
-    'number_of_portions': 2,
-    'calories_per_portion': 400
+    'totalCalories': 800,
+    'numberOfPortions': 2,
+    'caloriesPerPortion': 400
   }
   ]
 }
@@ -54,35 +54,38 @@ const getRecipe = function (id) {
 const createRecipe = function (recipe) {
   if (!validateRecipe(recipe)) {
     return false
-  };
+  }
 
-  const numOfPort = recipe.number_of_portions
-  const totalCal = recipe.total_calories
-  const caloriesPerPortion = totalCal / numOfPort
-  const newId = uuidv1()
+  const numberOfPortions = recipe.numberOfPortions
+  const totalCalories = recipe.totalCalories
+  // prevent division by zero and provide sane default;
+  let caloriesPerPortion
+  if (numberOfPortions >= 0) {
+    caloriesPerPortion = totalCalories / numberOfPortions
+  } else {
+    caloriesPerPortion = 0
+  }
+
+  const newRecipeId = uuidv1()
   const myRecipe = {
-    id: newId,
+    id: newRecipeId,
     title: recipe.title,
     ingredients: recipe.ingredients,
     instructions: recipe.instructions,
-    total_calories: recipe.total_calories,
-    number_of_portions: recipe.number_of_portions,
-    calories_per_portion: caloriesPerPortion
+    totalCalories: recipe.totalCalories,
+    numberOfPortions: recipe.numberOfPortions,
+    caloriesPerPortion: caloriesPerPortion
   }
   window.db.recipes.push(myRecipe)
 
-  return newId
+  return newRecipeId
 }
 
 /** Updates recipe in the database.  */
 const updateRecipe = function (id, key, newValue) {
-  if (!validateRecipeKey(key, newValue)) {
-    if (!isValidKey(key)) {
-      throw new Error("Your key doesn't exist")
-    } else {
-      return false
-    }
-  };
+  if (!validateRecipeKey(key, newValue) && !isValidKey(key)) {
+    throw new Error("Your key doesn't exist")
+  }
 
   const doesIdExist = window.db.recipes.find(function (el) {
     return el.id === id
@@ -95,8 +98,8 @@ const updateRecipe = function (id, key, newValue) {
   switch (key) {
     case 'id':
       throw new Error("You can't update id!")
-    case 'calories_per_portion':
-      throw new Error("You can't update calories_per_portion!")
+    case 'caloriesPerPortion':
+      throw new Error("You can't update caloriesPerPortion!")
   }
 
   const recipeIndex = window.db.recipes.findIndex(obj => {

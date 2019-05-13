@@ -21,22 +21,22 @@ test('validateRecipeKey properly validates instructions', () => {
   expect(validateRecipeKey('instructions', 'Mushroom Soup')).toBe(true)
 })
 
-test('validateRecipeKey properly validates total_calories', () => {
-  expect(() => validateRecipeKey('total_calories', null)).toThrow('total_calories has to be number')
-  expect(() => validateRecipeKey('total_calories', undefined)).toThrow('total_calories has to be number')
-  expect(() => validateRecipeKey('total_calories', true)).toThrow('total_calories has to be number')
-  expect(() => validateRecipeKey('total_calories', {})).toThrow('total_calories has to be number')
-  expect(() => validateRecipeKey('total_calories', '450')).toThrow('total_calories has to be number')
-  expect(validateRecipeKey('total_calories', 450)).toBe(true)
+test('validateRecipeKey properly validates totalCalories', () => {
+  expect(() => validateRecipeKey('totalCalories', null)).toThrow('totalCalories has to be number')
+  expect(() => validateRecipeKey('totalCalories', undefined)).toThrow('totalCalories has to be number')
+  expect(() => validateRecipeKey('totalCalories', true)).toThrow('totalCalories has to be number')
+  expect(() => validateRecipeKey('totalCalories', {})).toThrow('totalCalories has to be number')
+  expect(() => validateRecipeKey('totalCalories', '450')).toThrow('totalCalories has to be number')
+  expect(validateRecipeKey('totalCalories', 450)).toBe(true)
 })
 
-test('validateRecipeKey properly validates number_of_portions', () => {
-  expect(() => validateRecipeKey('number_of_portions', null)).toThrow('number_of_portions has to be number')
-  expect(() => validateRecipeKey('number_of_portions', undefined)).toThrow('number_of_portions has to be number')
-  expect(() => validateRecipeKey('number_of_portions', true)).toThrow('number_of_portions has to be number')
-  expect(() => validateRecipeKey('number_of_portions', {})).toThrow('number_of_portions has to be number')
-  expect(() => validateRecipeKey('number_of_portions', '450')).toThrow('number_of_portions has to be number')
-  expect(validateRecipeKey('number_of_portions', 450)).toBe(true)
+test('validateRecipeKey properly validates numberOfPortions', () => {
+  expect(() => validateRecipeKey('numberOfPortions', null)).toThrow('numberOfPortions has to be number')
+  expect(() => validateRecipeKey('numberOfPortions', undefined)).toThrow('numberOfPortions has to be number')
+  expect(() => validateRecipeKey('numberOfPortions', true)).toThrow('numberOfPortions has to be number')
+  expect(() => validateRecipeKey('numberOfPortions', {})).toThrow('numberOfPortions has to be number')
+  expect(() => validateRecipeKey('numberOfPortions', '450')).toThrow('numberOfPortions has to be number')
+  expect(validateRecipeKey('numberOfPortions', 450)).toBe(true)
 })
 
 test('validateRecipeKey properly validates id', () => {
@@ -76,7 +76,7 @@ test('validateRecipe returns true for valid recipe', () => {
   expect(validateRecipe({
     'id': 4,
     'title': 'Pasta alla Genovese',
-    'calories_per_portion': 568
+    'caloriesPerPortion': 568
   })).toBe(true)
 })
 

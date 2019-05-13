@@ -6,12 +6,12 @@ const defaultDatabase = {
   recipes: [{
     'id': 4,
     'title': 'Pasta alla Genovese',
-    'calories_per_portion': 568
+    'caloriesPerPortion': 568
   },
   {
     'id': 8,
     'title': 'Pizza',
-    'calories_per_portion': 644
+    'caloriesPerPortion': 644
   }]
 }
 

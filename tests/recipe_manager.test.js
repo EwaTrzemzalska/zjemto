@@ -15,12 +15,12 @@ test('getRecipes returns recipes', () => {
   expect(getRecipes()).toEqual([{
     id: 4,
     title: 'Pasta alla Genovese',
-    calories_per_portion: 568
+    caloriesPerPortion: 568
   },
   {
     id: 8,
     title: 'Pizza',
-    calories_per_portion: 644
+    caloriesPerPortion: 644
   }])
 })
 
@@ -29,7 +29,7 @@ test('getRecipe returns recipe by id', () => {
   expect(getRecipe(4)).toEqual({
     id: 4,
     title: 'Pasta alla Genovese',
-    calories_per_portion: 568
+    caloriesPerPortion: 568
   })
 })
 
@@ -44,17 +44,17 @@ test("createRecipe returns new recipe's id", () => {
     title: 'Soup',
     ingredients: ['Tomato', 'Cream'],
     instructions: 'Cook',
-    total_calories: 600,
-    number_of_portions: 4
+    totalCalories: 600,
+    numberOfPortions: 4
   })
   expect(getRecipe(newId)).toEqual({
     id: newId,
     title: 'Soup',
     ingredients: ['Tomato', 'Cream'],
     instructions: 'Cook',
-    total_calories: 600,
-    number_of_portions: 4,
-    calories_per_portion: 150
+    totalCalories: 600,
+    numberOfPortions: 4,
+    caloriesPerPortion: 150
   })
 
   // TODO returns error when not enough keys
@@ -65,18 +65,18 @@ test('createRecipe returns false when used key not exist', () => {
     title: 'Soup',
     animal: ['Tomato', 'Cream'],
     instructions: 'Cook',
-    total_calories: 600,
-    number_of_portions: 4
+    totalCalories: 600,
+    numberOfPortions: 4
   })).toBe(false)
 })
 
-test('updateRecipe returns update recipe', () => {
+test('updateRecipe properly updates recipe title', () => {
   setDefaultDatabase()
   updateRecipe(4, 'title', 'My new Pasta')
   expect(getRecipe(4)).toEqual({
     id: 4,
     title: 'My new Pasta',
-    calories_per_portion: 568
+    caloriesPerPortion: 568
   })
 })
 
@@ -85,9 +85,9 @@ test("updateRecipe prevents updating recipe's id", () => {
   expect(() => updateRecipe(4, 'id', 6)).toThrow("You can't update id!")
 })
 
-test('updateRecipe prevents updating calories_per_portion', () => {
+test('updateRecipe prevents updating caloriesPerPortion', () => {
   setDefaultDatabase()
-  expect(() => updateRecipe(4, 'calories_per_portion', 888)).toThrow("You can't update calories_per_portion!")
+  expect(() => updateRecipe(4, 'caloriesPerPortion', 888)).toThrow("You can't update caloriesPerPortion!")
 })
 
 test("updateRecipe returns error when id doesn't exist", () => {
