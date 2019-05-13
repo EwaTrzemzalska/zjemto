@@ -58,7 +58,7 @@ const createRecipe = function (recipe) {
 
   const numberOfPortions = recipe.numberOfPortions
   const totalCalories = recipe.totalCalories
-  // prevent division by zero and provide sane default;
+  // prevent division by zero and provide sane default:
   let caloriesPerPortion
   if (numberOfPortions >= 0) {
     caloriesPerPortion = totalCalories / numberOfPortions
