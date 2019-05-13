@@ -39,10 +39,9 @@ const validateRecipeKey = function (key, value) {
 
 /** Returns true for a valid recipe object, throws exception otherwise */
 const validateRecipe = function (recipe) {
-  /* when recipe is empty the for loop will not run. We use result to return
-  false instead of undefined
-  // when recipe is not empty result will be set to true and when all keys
-  will pass validation, the whole recipe is valid
+  /* When recipe is empty the for loop will not run. We use result to return
+  // false instead of undefined. When recipe is not empty result will be set to
+  // true and when all keys will pass validation, the whole recipe is valid.
   */
   let result = false
   for (const key in recipe) {
