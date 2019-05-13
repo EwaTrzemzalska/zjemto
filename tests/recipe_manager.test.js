@@ -1,81 +1,107 @@
 const {
   getRecipes,
-  getRecipe, 
-  createRecipe, 
+  getRecipe,
+  createRecipe,
   updateRecipe,
   deleteRecipe
-} = require('../js/recipe_manager');
+} = require('../js/recipe_manager')
 
+const {
+  setDefaultDatabase
+} = require('./helpers.js')
 
-let database = {
-  recipes: [{
-    id: 4,
-    title: "Pasta alla Genovese",
-    calories_per_portion: 568
-  },
-  {
-    id: 8,
-    title: "Pizza",
-    calories_per_portion: 644
-  }]
-};
-
-
-test("getRecipes returns recipes", () => {
-  window.db = database;
+test('getRecipes returns recipes', () => {
+  setDefaultDatabase()
   expect(getRecipes()).toEqual([{
     id: 4,
-    title: "Pasta alla Genovese"
+    title: 'Pasta alla Genovese',
+    caloriesPerPortion: 568
   },
   {
     id: 8,
-    title: "Pizza"
-  }]);
-});
+    title: 'Pizza',
+    caloriesPerPortion: 644
+  }])
+})
 
-test("getRecipe returns recipe by id", () => {
-  window.db = database;
+test('getRecipe returns recipe by id', () => {
+  setDefaultDatabase()
   expect(getRecipe(4)).toEqual({
     id: 4,
-    title: "Pasta alla Genovese"
-  });
-});
+    title: 'Pasta alla Genovese',
+    caloriesPerPortion: 568
+  })
+})
 
 test("getRecipe didn't returns recipe by not existing id", () => {
-  window.db = database;
-  expect(getRecipe(10)).toBeNull();
-});
+  setDefaultDatabase()
+  expect(getRecipe(10)).toBe(undefined)
+})
 
 test("createRecipe returns new recipe's id", () => {
-  window.db = database;
-  const newId = createRecipe({title: "Soup"});
-  expect(getRecipe(newId)).toBe({
-    id: newId,
-    title: "Soup"
+  setDefaultDatabase()
+  const newId = createRecipe({
+    title: 'Soup',
+    ingredients: ['Tomato', 'Cream'],
+    instructions: 'Cook',
+    totalCalories: 600,
+    numberOfPortions: 4
   })
-  // if ID is new
-  // if any ID is returned
-  // if function returns error when you use not existing key
-  // if calculates calories_per_portion
-  // 
-});
+  expect(getRecipe(newId)).toEqual({
+    id: newId,
+    title: 'Soup',
+    ingredients: ['Tomato', 'Cream'],
+    instructions: 'Cook',
+    totalCalories: 600,
+    numberOfPortions: 4,
+    caloriesPerPortion: 150
+  })
+
+  // TODO returns error when not enough keys
+})
+
+test('createRecipe returns false when used key not exist', () => {
+  expect(createRecipe({
+    title: 'Soup',
+    animal: ['Tomato', 'Cream'],
+    instructions: 'Cook',
+    totalCalories: 600,
+    numberOfPortions: 4
+  })).toBe(false)
+})
+
+test('updateRecipe properly updates recipe title', () => {
+  setDefaultDatabase()
+  updateRecipe(4, 'title', 'My new Pasta')
+  expect(getRecipe(4)).toEqual({
+    id: 4,
+    title: 'My new Pasta',
+    caloriesPerPortion: 568
+  })
+})
 
 test("updateRecipe prevents updating recipe's id", () => {
- window.db = database;
- expect(updateRecipe(4, id, 6)).toThrow("You can't update id!");
-});
+  setDefaultDatabase()
+  expect(() => updateRecipe(4, 'id', 6)).toThrow("You can't update id!")
+})
 
-test("updateRecipe prevents updating calories_per_portion", () => {
-  window.db = database;
-  expect(updateRecipe(4, calories_per_portion, 888)).toThrow("You can't update calories_per_portion ")
-});
+test('updateRecipe prevents updating caloriesPerPortion', () => {
+  setDefaultDatabase()
+  expect(() => updateRecipe(4, 'caloriesPerPortion', 888)).toThrow("You can't update caloriesPerPortion!")
+})
 
 test("updateRecipe returns error when id doesn't exist", () => {
-  window.db = database;
-  expect(updateRecipe(12, title, 'Sausage')).toThrow("Your id doesn't exist")
-});
+  setDefaultDatabase()
+  expect(() => updateRecipe(12, 'title', 'Sausage')).toThrow("Your id doesn't exist")
+})
 
 test("updateRecipe returns error when key doesn't exist", () => {
-  window.db = database;
-  expect(updateRecipe(4, animal, 'dog')).toThrow("Your key doesn't exist")
-});
+  setDefaultDatabase()
+  expect(() => updateRecipe(4, 'animal', 'dog')).toThrow("Your key doesn't exist")
+})
+
+test('deleteRecipe deletes recipe from database', () => {
+  setDefaultDatabase()
+  deleteRecipe(4)
+  expect(getRecipe(4)).toBe(undefined)
+})
