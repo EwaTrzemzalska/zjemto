@@ -61,13 +61,13 @@ test("createRecipe returns new recipe's id", () => {
 })
 
 test('createRecipe returns false when used key not exist', () => {
-  expect(createRecipe({
+  expect(() => createRecipe({
     title: 'Soup',
     animal: ['Tomato', 'Cream'],
     instructions: 'Cook',
     totalCalories: 600,
     numberOfPortions: 4
-  })).toBe(false)
+  })).toThrow("Your key doesn't exist")
 })
 
 test('updateRecipe properly updates recipe title', () => {

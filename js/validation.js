@@ -5,13 +5,9 @@ const validateTypeOfKey = function (key, value, type) {
   }
 }
 
-const allKeys = ['id', 'title', 'ingredients', 'instructions', 'totalCalories', 'numberOfPortions', 'caloriesPerPortion']
-const isValidKey = function (key) {
-  return allKeys.includes(key)
-}
-
 /** Returns true for a valid recipe key-value pair, throws exception otherwise */
 const validateRecipeKey = function (key, value) {
+
   switch (key) {
     case 'title':
     case 'instructions':
@@ -32,7 +28,7 @@ const validateRecipeKey = function (key, value) {
       }
       break
     default:
-      return false
+      throw new Error("Your key doesn't exist")
   }
   return true
 }
@@ -53,8 +49,20 @@ const validateRecipe = function (recipe) {
   return result
 }
 
+const doesIdExist = function (recipes, id) {
+  return recipes.find(function (el) {
+    return el.id === id
+  })
+}
+
+const validateIdExistance = function (recipes, id) {
+  if (!doesIdExist(recipes, id)) {
+    throw new Error("Your id doesn't exist")
+  }
+}
+
 module.exports = {
   validateRecipeKey: validateRecipeKey,
   validateRecipe: validateRecipe,
-  isValidKey: isValidKey
+  validateIdExistance: validateIdExistance
 }

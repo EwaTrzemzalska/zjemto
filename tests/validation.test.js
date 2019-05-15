@@ -69,7 +69,7 @@ test('validateRecipeKey properly validates if every ingredient is a string', () 
 })
 
 test("validateRecipeKey returns false when key doesn't exist", () => {
-  expect(validateRecipeKey('animal', 'doggo')).toBe(false)
+  expect(() => validateRecipeKey('animal', 'doggo')).toThrow("Your key doesn't exist")
 })
 
 test('validateRecipe returns true for valid recipe', () => {
@@ -85,9 +85,9 @@ test('validateRecipe returns false for empty recipe', () => {
 })
 
 test('validateRecipe returns false for invalid recipe', () => {
-  expect(validateRecipe({
+  expect(() => validateRecipe({
     'id': 10,
     'title': 'Tomato Soup',
     'animal': 'frog'
-  })).toBe(false)
+  })).toThrow("Your key doesn't exist")
 })
