@@ -2,7 +2,8 @@ const uuidv1 = require('uuid/v1')
 
 const {
   validateRecipeKey,
-  validateRecipe
+  validateRecipe,
+  validateIdExistance
 } = require('../js/validation')
 
 window.db = {
@@ -85,13 +86,7 @@ const updateRecipe = function (id, key, newValue) {
 
   validateRecipeKey(key, newValue)
 
-  const doesIdExist = window.db.recipes.find(function (el) {
-    return el.id === id
-  })
-
-  if (!doesIdExist) {
-    throw new Error("Your id doesn't exist")
-  }
+  validateIdExistance(window.db.recipes, id)
 
   switch (key) {
     case 'id':

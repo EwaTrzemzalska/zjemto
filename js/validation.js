@@ -49,7 +49,20 @@ const validateRecipe = function (recipe) {
   return result
 }
 
+const doesIdExist = function (recipes, id) {
+  return recipes.find(function (el) {
+    return el.id === id
+  })
+}
+
+const validateIdExistance = function (recipes, id) {
+  if (!doesIdExist(recipes, id)) {
+    throw new Error("Your id doesn't exist")
+  }
+}
+
 module.exports = {
   validateRecipeKey: validateRecipeKey,
-  validateRecipe: validateRecipe
+  validateRecipe: validateRecipe,
+  validateIdExistance: validateIdExistance
 }
