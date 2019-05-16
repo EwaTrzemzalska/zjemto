@@ -20,47 +20,23 @@
   <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
-        <li class="uk-active"><a href="index.html">Home</a></li>
+        <li  class="uk-active"><a href="index.html">Home</a></li>
         <li><a href="addrecipe.html">Add recipe</a></li>
       </ul>
     </div>
   </nav>
 
-  <form action="index.html" method="post" class="flex-container uk-form-stacked margin-medium">
-    <div class="flex-item">
-      <label for="recipe-title" class="uk-form-label">TITLE:</label>
-      <input type="text" id="recipe-title" name="title" class="uk-input uk-form-controls uk-form-width-medium">
-    </div>
-    <div class="flex-item">
-      <label for="ingredients" class="uk-form-label">INGREDIENTS:</label>
-      <textarea id="ingredients" name="recipe_ingredients"
-        class="uk-textarea uk-form-controls uk-form-width-large"></textarea>
-    </div>
-    <div class="flex-item">
-      <label for="instructions" class="uk-form-label">INSTRUCTIONS (it's optionally):</label>
-      <textarea id="instructions" name="user_instructions"
-        class="uk-textarea uk-form-controls uk-form-width-large"></textarea>
-    </div>
-    <div class="flex-item">
-      <label for="total-cal" class="uk-form-label">TOTAL CALORIES:</label>
-      <input type="number" id="total-cal" name="tocal_calories" class="uk-input uk-form-controls uk-form-width-xsmall">
-    </div>
-    <div class="flex-item">
-      <label for="portions-number" class="uk-form-label">NUMBER OF PORTIONS:</label>
-      <input type="number" id="portions-number" name="portions_num"
-        class="uk-input uk-form-controls uk-form-width-xsmall">
-    </div>
-    <div class="flex-item">
-      <label for="cal-per-portion" class="uk-form-label">CALORIES PER PORTION:</label>
-      <input type="number" id="cal-per-portion" name="cal_pp" class="uk-input uk-form-controls uk-form-width-xsmall">
-    </div>
-    <input type="submit" value="Save" class="margin-small">
 
+  <form class="uk-search uk-search-default margin-medium">
+    <div class="uk-margin">
+      <label for="searching-field" class="font-size-medium">WHAT ARE YOU LOOKING FOR?</label>
+      <input id="searching-field" class="uk-search-input" type="search" placeholder="Search...">
+      <button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
+
+    </div>
   </form>
 
-
-
-
+  <!-- Add your site or application content here -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
   <script src="dist/bundle.js"></script>
