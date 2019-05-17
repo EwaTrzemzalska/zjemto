@@ -1,5 +1,3 @@
-console.log('Hello World')
-
 const {
   getRecipes,
   getRecipe,
@@ -7,9 +5,6 @@ const {
   updateRecipe,
   deleteRecipe
 } = require('../js/recipe_manager')
-
-// zrobic loopa ktory consolloguje recipesy
-// stworz funkcje ktorej jak przeslesz recipe to doda ja do listy na stronie
 
 const appendRecipeToRecipeList = function (recipe) {
   // creating li
