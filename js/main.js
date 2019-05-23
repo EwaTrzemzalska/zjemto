@@ -25,17 +25,9 @@ const displayRecipes = function () {
 
 displayRecipes()
 
-// const displayRecipe = function (id) {
-//   const recipe = getRecipe(id)
-//   const p = document.createElement('p')
-//   const recipeTitle = document.createTextNode(recipe.title)
-//   const recipeIngredients = document.createTextNode(recipe.ingredients)
-//   p.appendChild(recipeTitle)
-//   p.appendChild(recipeIngredients)
-//   const div = document.getElementById('display-recipe')
-//   div.appendChild(p)
-// }
-
-// displayRecipe(1)
-
-// loop over ingredients array, put each one to separate li
+const appendElementWithText = function (parent, tagName, text) {
+  const textNode = document.createTextNode(text)
+  const element = document.createElement(tagName)
+  element.appendChild(textNode)
+  parent.appendChild(element)
+}
