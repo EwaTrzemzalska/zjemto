@@ -32,13 +32,13 @@ const appendElementWithText = function (parent, tagName, text) {
   parent.appendChild(element)
 }
 
-const createDecriptionList = function (terms, details) {
+const buildRecipeDetails = function (recipeDetails) {
   const dl = document.createElement('dl')
-  for (let i = 0; i < terms.length; i++) {
-    const term = terms[i]
-    const detail = details[i]
-    appendElementWithText(dl, 'dt', term)
-    appendElementWithText(dl, 'dd', detail)
+
+  for (let i = 0; i < recipeDetails.length; i++) {
+    const { label, value } = recipeDetails[i]
+    appendElementWithText(dl, 'dt', label)
+    appendElementWithText(dl, 'dd', value)
   }
   return dl
 }
@@ -48,7 +48,28 @@ const displayRecipe = function (recipe) {
   div.classList.add('blue-border', 'recipe-box')
   appendElementWithText(div, 'h1', recipe.title)
 
-  const descriptionList = createDecriptionList(['Ingredients', 'Instructions', 'Total calories', 'Number of Portions', 'Calories per portion'], [recipe.ingredients, recipe.instructions, recipe.totalCalories, recipe.numberOfPortions, recipe.caloriesPerPortion])
+  const descriptionList = buildRecipeDetails([
+    {
+      label: 'Ingredients',
+      value: recipe.ingredients
+    },
+    {
+      label: 'Instructions',
+      value: recipe.instructions
+    },
+    {
+      label: 'Total calories',
+      value: recipe.totalCalories
+    },
+    {
+      label: 'Number of Portions',
+      value: recipe.numberOfPortions
+    },
+    {
+      label: 'Calories per portion',
+      value: recipe.caloriesPerPortion
+    }
+  ])
 
   div.appendChild(descriptionList)
 }
