@@ -24,3 +24,54 @@ const displayRecipes = function () {
 }
 
 displayRecipes()
+
+const appendElementWithText = function (parent, tagName, text) {
+  const textNode = document.createTextNode(text)
+  const element = document.createElement(tagName)
+  element.appendChild(textNode)
+  parent.appendChild(element)
+}
+
+const buildRecipeDetails = function (recipeDetails) {
+  const dl = document.createElement('dl')
+
+  for (let i = 0; i < recipeDetails.length; i++) {
+    const { label, value } = recipeDetails[i]
+    appendElementWithText(dl, 'dt', label)
+    appendElementWithText(dl, 'dd', value)
+  }
+  return dl
+}
+
+const displayRecipe = function (recipe) {
+  const div = document.getElementById('display-recipe')
+  div.classList.add('blue-border', 'recipe-box')
+  appendElementWithText(div, 'h1', recipe.title)
+
+  const descriptionList = buildRecipeDetails([
+    {
+      label: 'Ingredients',
+      value: recipe.ingredients
+    },
+    {
+      label: 'Instructions',
+      value: recipe.instructions
+    },
+    {
+      label: 'Total calories',
+      value: recipe.totalCalories
+    },
+    {
+      label: 'Number of Portions',
+      value: recipe.numberOfPortions
+    },
+    {
+      label: 'Calories per portion',
+      value: recipe.caloriesPerPortion
+    }
+  ])
+
+  div.appendChild(descriptionList)
+}
+
+displayRecipe(getRecipe(1))

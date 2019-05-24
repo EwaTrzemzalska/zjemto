@@ -29,18 +29,21 @@
 
   <form class="uk-search uk-search-default margin-medium">
     <div class="uk-margin">
-      <label for="searching-field" class="font-size-medium">WHAT ARE YOU LOOKING FOR?</label>
+      <label for="searching-field" class="font-size-small">WHAT ARE YOU LOOKING FOR?</label>
       <input id="searching-field" class="uk-search-input" type="search" placeholder="Search...">
       <button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
-
     </div>
   </form>
 
-  <!-- zrob ula i wyswietl najprostsze lisy z tytulami -->
+  <div class="uk-grid uk-child-width-expand">
+      <div>
+        <ul id="recipe-list"></ul>
+      </div>
 
-  <ul id="recipe-list">
-
-  </ul>
+      <div id="display-recipe">
+        
+      </div>
+  </div>
 
   <!-- Add your site or application content here -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
